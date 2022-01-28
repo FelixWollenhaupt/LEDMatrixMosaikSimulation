@@ -7,7 +7,7 @@ META = {
     'models': {
         'SLED': {
             'public': True,
-            'params': [''],
+            'params': ['coordinate'],
             'attrs': ['inputs']
         }
     }
@@ -21,12 +21,12 @@ class SLEDSimulator(mosaik_api.Simulator):
         self.entities = {}
         self.time = 0
 
-    def create(self, num, model):
+    def create(self, num, model, coordinate):
         n_leds = len(self.entities)
         entities = []
         for i in range(n_leds, n_leds + num):
             eid = f"{self.eid_prefix}{i}"
-            self.entities[eid] = SLED()
+            self.entities[eid] = SLED(coordinate)
             entities.append({'eid': eid, 'type': model})
 
         return entities

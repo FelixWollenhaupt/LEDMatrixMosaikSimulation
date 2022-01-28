@@ -1,14 +1,15 @@
 
 # Super Led: Led that has n inpus which all have to be true in order to glow
 class SLED:
-    def __init__(self) -> None:
+    def __init__(self, coordinate):
         self.inputs = []
+        self.coordinate = coordinate
         self.glowing = False
 
     def step(self):
         self.glowing = all(self.inputs)
         if self.glowing:
-            print("LED is currently glowing")
+            print(f"LED is currently glowing at {self.coordinate}")
 
 
 if __name__ == "__main__":#
