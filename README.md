@@ -9,3 +9,10 @@ A led-matrix optimizes the used pins to controll leds. You can, for example, con
 | *This is an exmaple schematic for a two-dimensional led-matrix.* |
 
 Take a look at https://www.jameco.com/Jameco/workshop/learning-center/electronic-fundamentals-working-with-led-dot-matrix-displays.html to learn more about led-matrices
+
+### SLEDs
+A SLED is a super-led. This type of led does not have a regular anode and cathode.
+This SLED uses any number of inputs and only glows, if all are set to True.
+This is achievable by using transistors.
+
+SLEDs are used in this project to simplify the simulation for higher dimensions. A 2d matrix can be easily simulated using regular leds, but with higher dimensions, it gets more complicated. 
