@@ -25,23 +25,13 @@ led_factory = world.start('SLEDSimulator')
 pin_factory = world.start('PinSimulator')
 
 
-
+# Use this 2d list to define the pins.
+# 1 represents that the transistors are not blocking the current.
+# 0 represents that the transnostors are blocking the current
 pin_values = [
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 0, 0]
+    [1, 0, 0, 1, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 1]
 ]
 
 sizes = []
@@ -56,22 +46,16 @@ for dimnesion_values in pin_values:
     pins.append(dimension_pins)
 
 
-print("hier")
 led_matrix = np.ndarray(shape=sizes, dtype=mosaik.scenario.Entity)
-print('da')
-print(led_matrix.size)
 
-runs = 0
+print(f"You are using {led_matrix.size} leds.")
+
+print("The Simulators are being created. For big matrices, this can take some time.")
 
 for coordinate, x in np.ndenumerate(led_matrix):
-    led_matrix[coordinate] = led_factory.SLED()
+    led_matrix[coordinate] = led_factory.SLED(coordinate=coordinate)
     for dim in range(len(sizes)):
         world.connect(pins[dim][coordinate[dim]], led_matrix[coordinate], ('charge', 'inputs'))
-    if runs % 100 == 0:
-        print(coordinate)
 
-    runs += 1
-
-print("fertich")
 
 world.run(until=END, print_progress=True)

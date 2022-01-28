@@ -15,7 +15,7 @@ SIM_CONFIG = {
 
 END = 10  # 10 seconds
 
-# Create World
+
 world = mosaik.World(SIM_CONFIG)
 
 led_factory = world.start('LEDSimulator')
@@ -23,11 +23,13 @@ pin_factory = world.start('PinSimulator')
 
 led_matrix = []
 
-for _ in range(3):
-    led_matrix.append(led_factory.LED.create(3))
 
-x_pin_values = [0, 1, 1]
-y_pin_values = [0, 0, 1]
+
+# Use these lists to change the pin values.
+# 0 represents negative charge, 1 represents positive charge.
+# x pins are connected to the anode, y pins are connected to the kathode
+x_pin_values = [0, 1, 1, 1]
+y_pin_values = [0, 0, 1, 0]
 
 x_pins = []
 y_pins = []
@@ -37,6 +39,9 @@ for v in x_pin_values:
 
 for v in y_pin_values:
     y_pins.append(pin_factory.Pin(init_charge=Charge(v)))
+
+for _ in range(len(x_pin_values)):
+    led_matrix.append(led_factory.LED.create(len(x_pin_values)))
 
 
 for i in range(len(y_pins)):
